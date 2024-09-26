@@ -1,0 +1,81 @@
+{
+    "name": "button-snippets",
+    "displayName": "Button Snippets",
+    "description": "Add custom code snippets through custom UI buttons.",
+    "icon": "media/button-snippets.logo.png",
+    "version": "0.0.2",
+    "publisher": "litchi",
+    "engines": {
+        "vscode": "^1.72.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "keywords": [
+        "custom snippets",
+        "UI buttons",
+        "code insertion"
+    ],
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "bssidebar",
+                    "title": "Button Snippets",
+                    "icon": "media/button-snippets.icon.svg"
+                }
+            ]
+        },
+        "views": {
+            "bssidebar": [
+                {
+                    "type": "webview",
+                    "id": "bottonSnippets",
+                    "name": "Botton Snippets",
+                    "dataProvider": "bsSidebarProvider"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "button-snippets.modifySidebar",
+                "category": "BS",
+                "title": "modify button snippets sidebar"
+            },
+            {
+                "command": "button-snippets.refreshSidebar",
+                "category": "BS",
+                "title": "refresh button snippets sidebar"
+            }
+        ],
+        "configuration": {
+            "title": "Button Snippet",
+            "properties": {}
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.88.0",
+        "@types/mocha": "^10.0.6",
+        "@types/node": "18.x",
+        "@typescript-eslint/eslint-plugin": "^7.4.0",
+        "@typescript-eslint/parser": "^7.4.0",
+        "eslint": "^8.57.0",
+        "typescript": "^5.3.3",
+        "@vscode/test-cli": "^0.0.8",
+        "@vscode/test-electron": "^2.3.9"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/openlitchi/Matplotlib-Pilot-Chinese"
+    }
+}

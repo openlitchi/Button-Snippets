@@ -1,0 +1,19 @@
+{
+    "buttons": [
+        {
+            "name": "numpy2vtk",
+            "id": "numpy2vtk",
+            "snippets": "def numpy2vtk(data:np.ndarray, property:str, filename:str,\n              X=1.0, Y=1.0, Z=1.0):\n    \n    NX,NY,NZ = data.shape\n    \n    grid = vtk.vtkImageData()\n    grid.SetDimensions(NX+1,NY+1,NZ+1)\n    grid.SetOrigin([0,0,0])\n    grid.SetSpacing([X/NX, Y/NY, Z/NZ])\n\n    # vtk cell arrays have x on the inners, so we need to reorder the data\n    idata = {}\n    for x in range(NX):\n        for y in range(NY):\n            for z in range(NZ):\n                i = z*NX*NY + y*NX + x\n                idata[i] = (x,y,z)\n        \n    vtkfluxdata = vtk.vtkDoubleArray()\n    vtkfluxdata.SetName(property)\n    for i in range(NX*NY*NZ):\n        vtkfluxdata.InsertNextValue(data[idata[i]])\n    \n    grid.GetCellData().AddArray(vtkfluxdata)\n    writer = vtk.vtkXMLImageDataWriter()\n    writer.SetInputData(grid)\n    writer.SetFileName(filename)\n    writer.Write()\n    "
+        },
+        {
+            "name": "按钮二",
+            "id": "btn2",
+            "snippets": "print('hello world 2!')\n"
+        },
+        {
+            "name": "按钮三",
+            "id": "btn3",
+            "snippets": "# ### 导入 matplotlib 和 numpy 包 ### #\nimport matplotlib.pyplot as plt \nimport numpy as np\nfrom matplotlib import font_manager\n\n# 此处为字体的路径\nfont_path = 'C:\\Users\\wuyao\\Documents\\fonts\\songTimes.ttf'   \nfont_manager.fontManager.addfont(font_path)\nprop = font_manager.FontProperties(fname=font_path)\n\nplt.rcParams['font.family'] = prop.get_name()\nplt.rcParams['mathtext.fontset'] = 'stix' # 'stix' | 'cm'\nplt.rcParams['font.size'] = 12\n\nplt.rcParams['xtick.direction'] = 'in'\nplt.rcParams['ytick.direction'] = 'in'\n"
+        }
+    ]
+}
